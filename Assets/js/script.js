@@ -58,6 +58,8 @@ function specialPrompt() {
   if (specialChars) {
     var randomSpecial = specialArray[Math.floor(Math.random()*specialArray.length)];
     fillerArray.push(randomSpecial);
+    charCount -= 1;
+    console.log(charCount + ' is the current count');
     numsPrompt(specialCheck);
   } else {
     numsPrompt(specialCheck);
@@ -72,6 +74,8 @@ function numsPrompt(specialCheck){
   if (numsChars) {
     var randomNums = numberArray[Math.floor(Math.random()*numberArray.length)];
     fillerArray.push(randomNums);
+    charCount -= 1;
+    console.log(charCount + ' is the current count');
     uppercasePrompt(specialCheck, numsCheck);
   } else {
     uppercasePrompt(specialCheck, numsCheck);
@@ -85,6 +89,8 @@ function uppercasePrompt (specialCheck, numsCheck) {
   if (uppercaseChars) {
     var randomUppercase = uppercaseArray[Math.floor(Math.random()*uppercaseArray.length)];
     fillerArray.push(randomUppercase);
+    charCount -= 1;
+    console.log(charCount + ' is the current count');
     lowercasePrompt(specialCheck, numsCheck, uppercaseCheck);
   } else {
     lowercasePrompt(specialCheck, numsCheck, uppercaseCheck);
@@ -99,6 +105,8 @@ function lowercasePrompt(specialCheck, numsCheck, uppercaseCheck){
   if (lowercaseChars){
     var randomLowercase = lowercaseArray[Math.floor(Math.random()*lowercaseArray.length)];
     fillerArray.push(randomLowercase);
+    charCount -= 1;
+    console.log(charCount + ' is the current count');
     getCharList(specialCheck, numsCheck, uppercaseCheck, lowercaseCheck);
   } else {
     getCharList(specialCheck, numsCheck, uppercaseCheck, lowercaseCheck);
@@ -117,17 +125,17 @@ function getCharList(specialCheck, numsCheck, uppercaseCheck, lowercaseCheck) {
     special = specialArray;
   } 
   if (!nums){
-    nums = [''];
+    nums = [];
   } else {
     nums = numberArray;
   }
   if (!upper){
-    upper = ['']    
+    upper = []    
   } else {
     upper = uppercaseArray;
   }
   if (!lower){
-    lower = ['']
+    lower = []
   } else {
     lower = lowercaseArray;
   }
@@ -139,11 +147,7 @@ function fillToLength(listPassword, charCount){
   console.log(fillerArray);
   for (let i = 0; i < charCount;i++) {
     console.log(i);
-    fillerArray.push(listPassword[Math.floor(Math.random()*listPassword.length)]); 
-    if (fillerArray.length+1 (charCount+1)){
-  
-    }
-    // i+1;     
+    fillerArray.push(listPassword[Math.floor(Math.random()*listPassword.length)]);     
   }
   var finalPass = fillerArray.join('')
   console.log(fillerArray);
