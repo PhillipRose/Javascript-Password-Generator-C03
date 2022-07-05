@@ -31,7 +31,6 @@ function writePassword(finalPass) {
 // {{COMPLETED}} FIRST function that is called after hitting the generate password button. makes sure the input type is changed to a number if possible and resets the password content and length.
 function passLength(){
   fillerArray = [];
-  console.log(fillerArray);
   charCount = 0;
   var charLength = prompt('Enter the desired length of your password. Must be between 8 and 128 characters long');
   let number = Number(charLength);
@@ -59,12 +58,10 @@ function specialPrompt() {
     var randomSpecial = specialArray[Math.floor(Math.random()*specialArray.length)];
     fillerArray.push(randomSpecial);
     charCount -= 1;
-    console.log(charCount + ' is the current count');
     numsPrompt(specialCheck);
   } else {
     numsPrompt(specialCheck);
-  }
-  console.log(fillerArray);  
+  }  
 };
  
 // {{COMPLETE}} Passes down the boolean from specialCheck and logs its own in numsCheck. Passes both to uppercasePrompt.  
@@ -75,12 +72,10 @@ function numsPrompt(specialCheck){
     var randomNums = numberArray[Math.floor(Math.random()*numberArray.length)];
     fillerArray.push(randomNums);
     charCount -= 1;
-    console.log(charCount + ' is the current count');
     uppercasePrompt(specialCheck, numsCheck);
   } else {
     uppercasePrompt(specialCheck, numsCheck);
   }
-  console.log(fillerArray);
 }
 
 function uppercasePrompt (specialCheck, numsCheck) {
@@ -95,7 +90,6 @@ function uppercasePrompt (specialCheck, numsCheck) {
   } else {
     lowercasePrompt(specialCheck, numsCheck, uppercaseCheck);
   }
-  console.log(fillerArray);
 };
 
 function lowercasePrompt(specialCheck, numsCheck, uppercaseCheck){
@@ -106,12 +100,10 @@ function lowercasePrompt(specialCheck, numsCheck, uppercaseCheck){
     var randomLowercase = lowercaseArray[Math.floor(Math.random()*lowercaseArray.length)];
     fillerArray.push(randomLowercase);
     charCount -= 1;
-    console.log(charCount + ' is the current count');
     getCharList(specialCheck, numsCheck, uppercaseCheck, lowercaseCheck);
   } else {
     getCharList(specialCheck, numsCheck, uppercaseCheck, lowercaseCheck);
   }
-  console.log(fillerArray);
 }
 
 function getCharList(specialCheck, numsCheck, uppercaseCheck, lowercaseCheck) {
@@ -140,17 +132,20 @@ function getCharList(specialCheck, numsCheck, uppercaseCheck, lowercaseCheck) {
     lower = lowercaseArray;
   }
   var listPassword = [...special, ...nums, ...upper, ...lower];
-  fillToLength(listPassword, charCount);
+  if (listPassword.length === 0){
+    window.alert('You must pick at least one type of character for your password, please start over.')
+    specialPrompt();
+  } else {
+    fillToLength(listPassword, charCount);
+  }
 }
 
 function fillToLength(listPassword, charCount){
-  console.log(fillerArray);
   for (let i = 0; i < charCount;i++) {
     console.log(i);
     fillerArray.push(listPassword[Math.floor(Math.random()*listPassword.length)]);     
   }
-  var finalPass = fillerArray.join('')
-  console.log(fillerArray);
+  var finalPass = fillerArray.join('');
   writePassword(finalPass);
 };
 
