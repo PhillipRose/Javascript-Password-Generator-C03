@@ -1,54 +1,85 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-var testWindow = document.querySelector('body');
+
 
 // ALL POSSIBLE CHARACTERS FOR PASSWORD USE AS ARRAYS. 
 var lowercaseArray = 'abcdefghijklmnopqrstuvwxyz'.split('');
 // console.log(lowercaseArray);
-
 var uppercaseArray = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split('');
 // console.log(uppercaseArray);
-
 var numberArray = [0,1,2,3,4,5,6,7,8,9];
 // console.log(numberArray);
-
 // had to use `` to avoid possible errors with "" or ''.
 var specialArray = `!"#$%&'()*+,-./:;<>=?@[]^_|{}~`.split(``);
 // console.log(specialArray);
 
+var charCount = 0;
+
 // combine all 'true' value characters into this last array to fill password to the correct length 
 var fillerArray = [];
-// fillerArray.push(...numberArray, ...specialArray);
-// console.log(fillerArray);
 
+// This will display the password once it is completed and in a string form
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
-
-}
-//  this will be to test the various types of popups and what they output / how to catch it. 
-function testPrompts (){
-  var testPrompt = prompt('Is this showing in the window when body is clicked?');
-  return testPrompt;
 }
 
- console.log(testPrompts());
- console.log('this is a linebreak');
-//  console.log(testPrompt);
- 
- if (testPrompts() === 1){
-  console.log('this is how to catch prompt output', testPrompts())
- } else {
-  console.log('look up how to catch prompt output.', testPrompts());
- };
+// {{COMPLETED}} FIRST function that is called after hitting the generate password button.
+function passLength(){
+  var charLength = prompt('Enter the desired length of your password. Must be between 8 and 128 characters long');
+  let number = Number(charLength);
+  numCheck(number);
+}
+
+// {{COMPLETED}} makes sure the user input is a number and between 8-128 then calls the special character prompt or resets if input is not valid.
+function numCheck (chars) {
+  if (typeof chars === 'number' && chars >= 8 && chars <= 128){
+    console.log('This input IS a number' + chars);
+    charCount = chars;
+    specialPrompt();
+  } else {
+    alert(`Your input is invalid, please enter a whole number between 8 and 128`)
+    passLength();
+  }
+  
+  
+}
+// console.log(chars + ' this is the return from numCheck');
+
+
+
+          // specialPrompt is working correctly 
+
+// pick a random element from the special characters array 
+// Used https://stackoverflow.com/a/5915122/19148641 as a resource
+function specialPrompt() {
+  console.log(charCount);
+  var specialChars = confirm('do you want at least one special character in your password? Ex:()*+,-./:;<>=?@[]^_|{}'); 
+
+  if (specialChars) {
+    var randomSpecial = specialArray[Math.floor(Math.random()*specialArray.length)];
+    fillerArray.push(randomSpecial);
+    console.log(fillerArray);
+    // numsPrompt();
+  } else {
+    console.log('no special characters')
+    // numsPrompt();
+  }
+
+}
+
 
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
-testWindow.addEventListener('click', testPrompts);
+// ORIGINAL EVENTLISTENER FOR BUTTON 
+// generateBtn.addEventListener("click", writePassword);
+
+
+
+generateBtn.addEventListener("click", passLength);
+
 
 // TODO: use .alert() with mdn syntax to create propmts which return true or false if confirm or cancel is clicked
 
