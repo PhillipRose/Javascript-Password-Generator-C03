@@ -9,9 +9,7 @@ var lowercaseArray = 'abcdefghijklmnopqrstuvwxyz'.split(``);
 var uppercaseArray = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split(``);
 
 var numberArray = '0123456789'.split(``);
-// console.log(numberArray);
 
-// had to use `` to avoid possible errors with "" or ''.
 var specialArray = `!"#$%&'()*+,-./:;<>=?@[]^_|{}~`.split(``);
 
 
