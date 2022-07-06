@@ -16,17 +16,12 @@ var specialArray = `!"#$%&'()*+,-./:;<>=?@[]^_|{}~`.split(``);
 // used when filling in the rest of the password with a for loop over the combined arrays. 
 var charCount = 0;
 
-
+// array to store characters as a result of user choices to the confirms
 var fillerArray = [];
 
-// This will display the password once it is completed and in a string form use arrayName.join('')
-// Write password to the #password input
-function writePassword(finalPass) {
-  var passwordText = document.querySelector("#password");
-  passwordText.value = finalPass;
-}
 
-// {{COMPLETED}} FIRST function that is called after hitting the generate password button. makes sure the input type is changed to a number if possible and resets the password content and length.
+
+//  FIRST function that is called after hitting the generate password button. makes sure the input type is changed to a number if possible and resets the password content and length.
 function passLength(){
   fillerArray = [];
   charCount = 0;
@@ -35,7 +30,7 @@ function passLength(){
   numValue(number);
 };
 
-// {{COMPLETED}} makes sure the user input is a number and between 8-128 then calls the special character prompt or resets if input is not valid.
+//  makes sure the user input is a number and between 8-128 then calls the special character prompt or resets if input is not valid.
 function numValue (chars) {
   if (typeof chars === 'number' && chars >= 8 && chars <= 128){
     charCount = chars;
@@ -46,7 +41,7 @@ function numValue (chars) {
   }  
 };
 
-// {{COMPLETED}} Once the input is valid, ask if user wants at least 1 special character in their password. Save the answer as true/false. Then move onto the number prompt.
+//  Once the input is valid, ask if user wants at least 1 special character in their password. Save the answer as true/false. Then move onto the number prompt.
 // pick a random element from the array 
 // Used https://stackoverflow.com/a/5915122/19148641 as a resource.
 function specialPrompt() {
@@ -76,6 +71,7 @@ function numsPrompt(specialCheck){
   }
 }
 
+// checks if the user wants any uppercase letters in the password as well as passes the booleans from previous functions through along with its own 
 function uppercasePrompt (specialCheck, numsCheck) {
   var uppercaseChars = confirm('Do you want at least one uppercase letter in your password?');
   var uppercaseCheck = uppercaseChars;
@@ -90,6 +86,7 @@ function uppercasePrompt (specialCheck, numsCheck) {
   }
 };
 
+// last check on if the user wants lowercase letters in the password and also passes all the booleans from the other confirms to the next function 
 function lowercasePrompt(specialCheck, numsCheck, uppercaseCheck){
   var lowercaseChars = confirm('do you want at least one lowercase letter in your password?');
   var lowercaseCheck =  lowercaseChars;
@@ -104,6 +101,7 @@ function lowercasePrompt(specialCheck, numsCheck, uppercaseCheck){
   }
 }
 
+// uses the booleans from the previous 4 functions to make an array for the next function and also makes sure at least one character type was selected  
 function getCharList(specialCheck, numsCheck, uppercaseCheck, lowercaseCheck) {
   var special = specialCheck;
   var nums = numsCheck;
@@ -138,6 +136,7 @@ function getCharList(specialCheck, numsCheck, uppercaseCheck, lowercaseCheck) {
   }
 }
 
+// uses the array from the previous function to randomly pick extra characters until the correct length is made and then passes that into the last function to display it. 
 function fillToLength(listPassword, charCount){
   for (let i = 0; i < charCount;i++) {
     console.log(i);
@@ -147,9 +146,9 @@ function fillToLength(listPassword, charCount){
   writePassword(finalPass);
 };
 
-// Add event listener to generate button
-// ORIGINAL EVENTLISTENER FOR BUTTON 
-// generateBtn.addEventListener("click", writePassword);
-
-
-
+// This will display the password once it is completed and in a string form use arrayName.join('')
+// Write password to the #password input
+function writePassword(finalPass) {
+  var passwordText = document.querySelector("#password");
+  passwordText.value = finalPass;
+};
